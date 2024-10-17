@@ -36,7 +36,7 @@ interface IAbuse {
 
 type ErrorsType = "noerrors" | "noscript" | "timeover" | "notavailable" | "noanswer" | "subscribercompleted"
 
-export interface ICallList {
+export interface ICall {
     id: number;
     partnership_id: string;
     partner_data: IPartnerData;
@@ -48,22 +48,27 @@ export interface ICallList {
     to_number: string;
     to_extension: string;
     is_skilla: number;
-    status: string;
+    status: 'Дозвонился' | "Не дозвонился";
     record: string;
     line_number: string;
     line_name: string;
-    in_out: number;
+    in_out: 1 | 0 | undefined;
     from_site: number;
     source: string;
-    errors: Array<ErrorsType>;
+    errors: ErrorsType[];
     disconnect_reason: string;
-    results: Array<ICallResult>;
-    stages: Array<IStage>;
+    results: ICallResult[];
+    stages: IStage[];
     abuse: IAbuse;
-    contact_name: string; 
-    contact_company: string; 
+    contact_name: string;
+    contact_company: string;
     person_id: 4042,
-    person_name: string; 
-    person_surname: string; 
-    person_avatar: string; 
+    person_name: string;
+    person_surname: string;
+    person_avatar: string;
+}
+
+export interface apiResponse {
+    total_rows: number;
+    results: ICall[]
 }
